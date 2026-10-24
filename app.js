@@ -1,6 +1,7 @@
-// 1. Paste your Supabase project URL and anon key (Project Settings > API)
+
 const SUPABASE_URL = "https://kmnwbbigoueufvrztggf.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImttbndiYmlnb3VldWZ2cnp0Z2dmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI3NzA4MzUsImV4cCI6MjEwODM0NjgzNX0.gN3HFXfHxVbqFJfKx0FJLxOrkFEhu219iHjVjtC6H5Y";
+
 let sb, setupError = "";
 if (SUPABASE_URL.includes("YOUR-PROJECT") || SUPABASE_KEY.includes("YOUR-ANON-KEY")) {
   setupError = "Open app.js and replace YOUR-PROJECT and YOUR-ANON-KEY at the top with your real Supabase URL and key.";
@@ -109,7 +110,7 @@ const views = {
     new FullCalendar.Calendar($("#cal"), {
       initialView: "dayGridMonth", height: "auto",
       headerToolbar: { left: "prev,next today", center: "title", right: "dayGridMonth,timeGridWeek" },
-      events: rows.filter(r => r.status !== "Cancelled").map(r => ({ title: `${r.member.name} / ${r.trainer.name}`, start: `${r.session_date}T${r.start_time}`, end: `${r.session_date}T${r.end_time}`, color: r.status === "Completed" ? "#1f8a5b" : "#e0561f" }))
+      events: rows.filter(r => r.status !== "Cancelled").map(r => ({ title: `${r.member.name} / ${r.trainer.name}`, start: `${r.session_date}T${r.start_time}`, end: `${r.session_date}T${r.end_time}`, color: r.status === "Completed" ? "#1f8a5b" : "#1d4e89" }))
     }).render();
     document.querySelectorAll("[data-cancel]").forEach(b => b.onclick = async () => {
       await q(sb.from("training_session").update({ status: "Cancelled" }).eq("session_id", b.dataset.cancel)); show("sessions");
@@ -146,3 +147,6 @@ function show(t) {
   views[t]().catch(e => { $("#view").innerHTML = ""; note(e.message); });
 }
 show("dashboard");
+
+
+  
